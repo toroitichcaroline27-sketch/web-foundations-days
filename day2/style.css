@@ -52,3 +52,18 @@ section, article {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/* Features CSS Grid Layout */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.features li {
+    background-color: #eef2f5;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #2c3e50;
+}
