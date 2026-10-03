@@ -37,3 +37,22 @@ notes = [];
 console.log("Longest Note (empty array):", longestNote());
 // Expected: null
 notes = tempNotes; // Restore original array
+// Step 4: Return object counting notes per category
+function countByCategory() {
+  const counts = {};
+  for (const note of notes) {
+    counts[note.category] = (counts[note.category] || 0) + 1;
+  }
+  return counts;
+}
+
+// Test cases for countByCategory
+console.log("Category Counts:", countByCategory());
+// Expected: { personal: 2, study: 2, work: 1 }
+
+// Edge case test with empty notes array
+const tempNotes2 = notes;
+notes = [];
+console.log("Category Counts (empty array):", countByCategory());
+// Expected: {}
+notes = tempNotes2; // Restore array
