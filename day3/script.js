@@ -83,3 +83,20 @@ notes = [{ id: 1, text: "Buy milk", category: "personal" }];
 console.log("Summary (1 note):", getSummary());
 // Expected: "1 note: 1 personal."
 notes = originalNotes; // Restore original notes array
+// Step 6: Return true if note text exists (ignoring case and extra spaces)
+function isDuplicate(text) {
+  const normalizedInput = text.trim().toLowerCase();
+  return notes.some(
+    (note) => note.text.trim().toLowerCase() === normalizedInput
+  );
+}
+
+// Test cases for isDuplicate
+console.log("Is duplicate ('Call mum'):", isDuplicate("Call mum"));
+// Expected: true
+
+console.log("Is duplicate ('  CALL MUM  '):", isDuplicate("  CALL MUM  "));
+// Expected: true (ignores spaces and upper case)
+
+console.log("Is duplicate ('Buy coffee'):", isDuplicate("Buy coffee"));
+// Expected: false
