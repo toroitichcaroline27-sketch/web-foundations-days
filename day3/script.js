@@ -100,3 +100,53 @@ console.log("Is duplicate ('  CALL MUM  '):", isDuplicate("  CALL MUM  "));
 
 console.log("Is duplicate ('Buy coffee'):", isDuplicate("Buy coffee"));
 // Expected: false
+// Step 7: Add a note with input validation and duplicate checking
+function addNote(text, category) {
+  const trimmedText = text.trim();
+  const allowedCategories = ["personal", "work", "study"];
+
+  // 1. Length validation (1-200 characters)
+  if (trimmedText.length < 1 || trimmedText.length > 200) {
+    console.log("Validation Failed: Note text must be between 1 and 200 characters.");
+    return false;
+  }
+
+  // 2. Category validation
+  if (!allowedCategories.includes(category)) {
+    console.log(`Validation Failed: Category '${category}' is invalid. Must be personal, work, or study.`);
+    return false;
+  }
+
+  // 3. Duplicate validation
+  if (isDuplicate(trimmedText)) {
+    console.log("Validation Failed: Duplicate note detected.");
+    return false;
+  }
+
+  // If all checks pass, construct new note and add to array
+  const newId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) + 1 : 1;
+  const newNote = {
+    id: newId,
+    text: trimmedText,
+    category: category,
+  };
+
+  notes.push(newNote);
+  console.log(`Note successfully added: "${trimmedText}" [${category}]`);
+  return true;
+}
+
+// Test cases for addNote
+console.log("\n--- Testing addNote ---");
+
+// Test 1: Successful addition
+console.log("Add valid note:", addNote("Prepare presentation for Monday", "work"));
+// Expected: true and success log
+
+// Test 2: Invalid category edge case
+console.log("Add invalid category:", addNote("Go to gym", "fitness"));
+// Expected: false and category error log
+
+// Test 3: Duplicate note edge case
+console.log("Add duplicate note:", addNote("Call mum", "personal"));
+// Expected: false and duplicate error log
