@@ -17,3 +17,23 @@ console.log("Search 'day':", searchNotes("day"));
 
 console.log("Search 'python':", searchNotes("python")); 
 // Expected: [] (empty array since no notes contain "python")
+// Step 3: Return note object with most characters, or null if empty
+function longestNote() {
+  if (notes.length === 0) {
+    return null;
+  }
+  return notes.reduce((longest, current) =>
+    current.text.length > longest.text.length ? current : longest
+  );
+}
+
+// Test cases for longestNote
+console.log("Longest Note:", longestNote());
+// Expected: Note 3 ("Email the project report to Caroline")
+
+// Edge case test (temporarily pass empty array check scenario)
+const tempNotes = notes;
+notes = [];
+console.log("Longest Note (empty array):", longestNote());
+// Expected: null
+notes = tempNotes; // Restore original array
