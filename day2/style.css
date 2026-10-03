@@ -141,3 +141,15 @@ nav a:hover {
     color: #f39c12;
     transform: translateY(-2px);
 }
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    main {
+        padding: 0 10px;
+    }
+}
