@@ -56,3 +56,30 @@ notes = [];
 console.log("Category Counts (empty array):", countByCategory());
 // Expected: {}
 notes = tempNotes2; // Restore array
+// Step 5: Return summary sentence using countByCategory and template literals
+function getSummary() {
+  const total = notes.length;
+  const word = total === 1 ? "note" : "notes";
+
+  if (total === 0) {
+    return "0 notes.";
+  }
+
+  const counts = countByCategory();
+  const categoryParts = Object.entries(counts).map(
+    ([cat, count]) => `${count} ${cat}`
+  );
+
+  return `${total} ${word}: ${categoryParts.join(", ")}.`;
+}
+
+// Test cases for getSummary
+console.log("Summary:", getSummary());
+// Expected: "5 notes: 2 personal, 2 study, 1 work."
+
+// Edge case test for single note pluralization
+const originalNotes = notes;
+notes = [{ id: 1, text: "Buy milk", category: "personal" }];
+console.log("Summary (1 note):", getSummary());
+// Expected: "1 note: 1 personal."
+notes = originalNotes; // Restore original notes array
