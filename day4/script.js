@@ -40,3 +40,19 @@ function restoreDraft() {
     noteText.value = savedDraft;
   }
 }
+// Step 6: Function to clear textarea, reset counters, and remove draft from localStorage
+function clearAll() {
+  noteText.value = "";
+  localStorage.removeItem("draftText");
+  updateCounts();
+}
+
+// Event listener for Clear button click
+clearBtn.addEventListener("click", clearAll);
+
+// Event listener for pressing Escape key inside the textarea
+noteText.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    clearAll();
+  }
+});
