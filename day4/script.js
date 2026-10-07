@@ -56,3 +56,33 @@ noteText.addEventListener("keydown", (e) => {
     clearAll();
   }
 });
+// Step 7: Handle Theme Toggle and theme persistence in localStorage
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark");
+    themeToggle.textContent = "Light mode";
+  } else {
+    document.body.classList.remove("dark");
+    themeToggle.textContent = "Dark mode";
+  }
+}
+
+themeToggle.addEventListener("click", () => {
+  const isDark = document.body.classList.toggle("dark");
+  const newTheme = isDark ? "dark" : "light";
+  themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+  localStorage.setItem("theme", newTheme);
+});
+
+// Initialization: Restore saved draft, theme, and update initial counts on page load
+function init() {
+  restoreDraft();
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  }
+  updateCounts();
+}
+
+// Run initialization
+init();
