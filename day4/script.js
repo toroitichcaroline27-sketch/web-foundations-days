@@ -27,3 +27,16 @@ function updateCounts() {
     charCount.classList.add("warning");
   }
 }
+// Step 4: Handle input event to update counts and save draft in localStorage
+noteText.addEventListener("input", () => {
+  updateCounts();
+  localStorage.setItem("draftText", noteText.value);
+});
+
+// Step 5: Function to restore saved draft on page load
+function restoreDraft() {
+  const savedDraft = localStorage.getItem("draftText");
+  if (savedDraft !== null) {
+    noteText.value = savedDraft;
+  }
+}
