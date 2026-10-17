@@ -39,3 +39,38 @@ function renderUsers(list) {
     usersList.appendChild(li);
   });
 }
+// 4. Fetch users from API with async/await and try/catch/finally
+async function loadUsers() {
+  loadBtn.disabled = true;
+  statusMsg.textContent = "Loading users...";
+  usersList.textContent = "";
+
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    usersData = data;
+
+    statusMsg.textContent = `Successfully loaded ${data.length} users.`;
+    renderUsers(usersData);
+  } catch (error) {
+    statusMsg.textContent = `Failed to load users: ${error.message}`;
+  } finally {
+    loadBtn.disabled = false;
+  }
+}
+
+// 5. Event Listeners
+loadBtn.addEventListener("click", loadUsers);
+
+filterInput.addEventListener("input", () => {
+  const query = filterInput.value.toLowerCase().trim();
+  const filteredUsers = usersData.filter((user) =>
+    user.name.toLowerCase().includes(query)
+  );
+  renderUsers(filteredUsers);
+});
